@@ -24,9 +24,44 @@ body {
 
 h2 {
   text-align: center;
-  margin: 0 0 20px;
+  margin: 0 0 20px; /*20px margin on bottom*/
 }
 
 .form {
   padding: 30px 40px;
+}
+
+.form-control {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.form-control label {
+  color: #777;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-control input {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  width: 100%; /*Sets width to be 100% of its container*/
+  font-size: 14px;
+  padding: 10px;
+}
+
+.form-control input:focus {
+  /*:focus selector is used to select the element that has focus*/
+  outline: none; /*Remove default input highlighting*/
+  border-color: #777;
+}
+
+.form-control.success input {
+  border-color: #2ecc71;
+}
+
+.form-control.error input {
+  border-color: #e74c3c;
 }
