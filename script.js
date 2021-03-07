@@ -45,6 +45,21 @@ function checkRequired(inputArr) {
   });
 }
 
+// A callback function that ensures the lengths of the username and password are not too short nor too long
+function checkLength(input, min, max) {
+  if (input.value.length < min) {
+    showError(
+      input,
+      `${getFieldName(input)} must contain at least ${min} characters`
+    );
+  } else if (input.value.length > max) {
+    showError(
+      input,
+      `${getFieldName(input)} cannot contain more than ${max} characters`
+    );
+  }
+}
+
 // Event listeners
 form.addEventListener("submit", function (e) {
   //Listening for a submit event; when the event occurs, an event object is passed to the function as the first parameter
@@ -52,4 +67,7 @@ form.addEventListener("submit", function (e) {
 
   //Instead of using multiple if statements, we'll use a function that will apply the showError, showSuccess functions on the array of DOM elements
   checkRequired([username, email, password, password2]);
+
+  checkLength(username, 3, 15);
+  checkLength(password, 6, 25);
 });
