@@ -26,13 +26,18 @@ function isValidEmail(email) {
   return re.test(String(email).toLowerCase()); //The test method returns true if the email supplied matches the regular expression
 }
 
+// Function that capitalizes field names
+function getFieldName(input) {
+  return input.id[0].toUpperCase() + input.id.slice(1);
+}
+
 // Function takes an array of DOM elements and checks each element for its validity
 function checkRequired(inputArr) {
   inputArr.forEach(function (input) {
     if (input.value.trim() === "") {
       showError(
         input,
-        `${input.id[0].toUpperCase()}${input.id.slice(1)} is required` // To print out the names of the DOM elements in capital case, e.g. Username, Email, Password
+        `${getFieldName(input)} is required` // To print out the names of the DOM elements in capital case, e.g. Username, Email, Password
       );
     } else {
       showSuccess(input);
