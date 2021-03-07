@@ -19,11 +19,17 @@ function showSuccess(input) {
   formControl.className = "form-control success";
 }
 
-// Email address checker
-function isValidEmail(email) {
+// Email checker
+function checkEmail(input) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  console.log(re.test(String(email).toLowerCase()));
-  return re.test(String(email).toLowerCase()); //The test method returns true if the email supplied matches the regular expression
+  console.log(re.test(String(input.value).toLowerCase()));
+
+  if (re.test(String(input.value).toLowerCase())) {
+    //The test method returns true if the email supplied matches the regular expression
+    showSuccess(input);
+  } else {
+    showError(input, "Email is not valid");
+  }
 }
 
 // Function that capitalizes field names
@@ -60,6 +66,14 @@ function checkLength(input, min, max) {
   }
 }
 
+// A callback function that checks if password and password2 are the same
+function checkPassword2(input1, input2) {
+  console.log(input1.value, input2.value);
+  if (input1.value !== input2.value) {
+    showError(input2, "Passwords do not match");
+  }
+}
+
 // Event listeners
 form.addEventListener("submit", function (e) {
   //Listening for a submit event; when the event occurs, an event object is passed to the function as the first parameter
@@ -70,4 +84,6 @@ form.addEventListener("submit", function (e) {
 
   checkLength(username, 3, 15);
   checkLength(password, 6, 25);
+  checkEmail(email);
+  checkPassword2(password, password2);
 });
