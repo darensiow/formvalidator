@@ -26,38 +26,25 @@ function isValidEmail(email) {
   return re.test(String(email).toLowerCase()); //The test method returns true if the email supplied matches the regular expression
 }
 
+// Function takes an array of DOM elements and checks each element for its validity
+function checkRequired(inputArr) {
+  inputArr.forEach(function (input) {
+    if (input.value.trim() === "") {
+      showError(
+        input,
+        `${input.id[0].toUpperCase()}${input.id.slice(1)} is required` // To print out the names of the DOM elements in capital case, e.g. Username, Email, Password
+      );
+    } else {
+      showSuccess(input);
+    }
+  });
+}
+
 // Event listeners
 form.addEventListener("submit", function (e) {
   //Listening for a submit event; when the event occurs, an event object is passed to the function as the first parameter
   e.preventDefault(); // Prevents form from being submitted
 
-  if (username.value === "") {
-    //If username field is empty, call a function that will cause error message to reveal itself
-    showError(username, "Username is required");
-  } else {
-    showSuccess(username);
-  }
-
-  if (email.value === "") {
-    //If username field is empty, call a function that will cause error message to reveal itself
-    showError(email, "Email is required");
-  } else if (!isValidEmail(email.value)) {
-    showError(email, "Please input a valid email");
-  } else {
-    showSuccess(email);
-  }
-
-  if (password.value === "") {
-    //If username field is empty, call a function that will cause error message to reveal itself
-    showError(password, "Password is required");
-  } else {
-    showSuccess(password);
-  }
-
-  if (password2.value === "") {
-    //If username field is empty, call a function that will cause error message to reveal itself
-    showError(password2, "Re-enter password");
-  } else {
-    showSuccess(password2);
-  }
+  //Instead of using multiple if statements, we'll use a function that will apply the showError, showSuccess functions on the array of DOM elements
+  checkRequired([username, email, password, password2]);
 });
